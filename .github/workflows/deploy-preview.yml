@@ -37,9 +37,4 @@ jobs:
         uses: marocchino/sticky-pull-request-comment@v2
         with:
           message: |
-            **✅ Deploy Preview ready!**
-            
-            | Name | Link |
-            |------|------|
-            | 🔗 **Preview URL** | [Visit Preview](${{steps.deploy.outputs.alias_url}}) |
-            | 📱 **Direct URL** | [Visit Direct](${{steps.deploy.outputs.url}}) |
+            Preview URL: ${{steps.deploy.outputs.alias_url}} ([Visit](${{steps.deploy.outputs.alias_url}}))
