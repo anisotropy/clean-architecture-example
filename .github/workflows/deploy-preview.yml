@@ -3,8 +3,7 @@ env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 on:
-  pull_request:
-    types: [opened, synchronize, reopened]
+  push:
     branches:
       - '**/base'
 jobs:
@@ -37,7 +36,7 @@ jobs:
           echo "url=$url" >> $GITHUB_OUTPUT
           echo "alias_url=https://$alias_url" >> $GITHUB_OUTPUT
       - name: Comment PR with deployment URLs
-        if: github.event_name == 'pull_request'
+        # if: github.event_name == 'pull_request'
         uses: marocchino/sticky-pull-request-comment@v2
         with:
           message: |
