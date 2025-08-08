@@ -26,15 +26,15 @@ jobs:
         run: vercel build --token=${{ secrets.TEST_VERCEL_TOKEN }}
       - name: Deploy Project Artifacts to Vercel
         id: deploy
+        # 참고: https://vercel.com/guides/how-to-alias-a-preview-deployment-using-the-cli
         run: |
           BRANCH_NAME=$(echo "${{ github.head_ref }}" | tr '/' '-' | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9-]//g')
           url="$(vercel deploy --prebuilt --token=${{ secrets.TEST_VERCEL_TOKEN }})"
           alias_url="clean-architecture-example-$BRANCH_NAME.anisotropys-projects.vercel.app"
           vercel alias --token=${{ secrets.TEST_VERCEL_TOKEN }} set "$url" "$alias_url"
-          echo "url=$url" >> $GITHUB_OUTPUT
           echo "alias_url=https://$alias_url" >> $GITHUB_OUTPUT
       - name: Comment PR with deployment URLs
         uses: marocchino/sticky-pull-request-comment@v2
         with:
           message: |
-            Preview URL: ${{steps.deploy.outputs.alias_url}} ([Visit](${{steps.deploy.outputs.alias_url}}))
+            **Preview URL**: ${{steps.deploy.outputs.alias_url}} <button type="button" onclick="navigator.clipboard.writeText(${{steps.deploy.outputs.alias_url}})"> Copy </button>
