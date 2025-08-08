@@ -100,6 +100,7 @@ export const RecipientUpdateView = (props: {
   const presenter = recipientUpdatePresenter(props.state);
   return (
     <div>
+      <div>---- #2</div>
       <h2>{presenter.header.title}</h2>
       <h4>{presenter.header.name}</h4>
       <form
