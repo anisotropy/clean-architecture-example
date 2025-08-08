@@ -4,8 +4,9 @@ env:
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 on:
   pull_request:
-    branches:
-      - '**/base'
+    types: [opened, synchronize, reopened]
+    # branches:
+    #   - '**/base'
 jobs:
   Deploy-Preview:
     runs-on: ubuntu-latest
