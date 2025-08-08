@@ -1,0 +1,22 @@
+name: Comment PR
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  Deploy-Preview:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Comment PR with deployment URLs
+        # if: github.event_name == 'pull_request'
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          message: |
+            **✅ Deploy Preview ready!**
+            
+            | Name | Link |
+            |------|------|
+            | 🔗 **Preview URL** | [Visit Preview](alias_url) |
+            | 📱 **Direct URL** | [Visit Direct](deployment_url) |
