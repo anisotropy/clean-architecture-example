@@ -27,4 +27,4 @@ jobs:
         run: |
           BRANCH_NAME=$(echo "${{ github.ref_name }}" | tr '/' '-' | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9-]//g')
           url="$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})"
-          vercel alias --token=${{ secrets.VERCEL_TOKEN }} set "$url" "clean-architecture-example-$BRANCH_NAME.anisotropy.vercel.app"
+          vercel alias --token=${{ secrets.TEST_VERCEL_TOKEN }} set "$url" "clean-architecture-example-$BRANCH_NAME.anisotropy.vercel.app"
