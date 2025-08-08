@@ -68,9 +68,4 @@ export default tseslint.config([
 ])
 ```
 
-**Preview**
-| URL | button |
-|-----|--------|
-| sdfsdfdsf.dsfsdf.dfsdfsdf | <button type="button" onclick="navigator.clipboard.writeText('ㄴㅇㄹㅇㄴㄹ)">Copy to Clipboard</button>
-
-**Preview URL**: sdfsdfdsf.dsfsdf.dfsdfsdf <button type="button" onclick="navigator.clipboard.writeText('ㄴㅇㄹㅇㄴㄹ)">Copy</button>
+**🚀 Preview URL**: sdfsdfdsf.dsfsdf.dfsdfsdf

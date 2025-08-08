@@ -37,4 +37,4 @@ jobs:
         uses: marocchino/sticky-pull-request-comment@v2
         with:
           message: |
-            **Preview URL**: ${{steps.deploy.outputs.alias_url}} <button type="button" onclick="navigator.clipboard.writeText(${{steps.deploy.outputs.alias_url}})"> Copy </button>
+            **🚀 Preview URL**: ${{steps.deploy.outputs.alias_url}}
