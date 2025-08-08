@@ -5,8 +5,8 @@ env:
 on:
   pull_request:
     types: [opened, synchronize, reopened]
-    # branches:
-    #   - '**/base'
+    branches:
+      - '**/base'
 jobs:
   Deploy-Preview:
     runs-on: ubuntu-latest
@@ -29,17 +29,14 @@ jobs:
         run: vercel build --token=${{ secrets.TEST_VERCEL_TOKEN }}
       - name: Deploy Project Artifacts to Vercel
         id: deploy
-        # github.event.pull_request.head.ref
-        # github.ref_name
         run: |
-          BRANCH_NAME=$(echo "${{ github.event.pull_request.head.ref }}" | tr '/' '-' | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9-]//g')
+          BRANCH_NAME=$(echo "${{ github.head_ref }}" | tr '/' '-' | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9-]//g')
           url="$(vercel deploy --prebuilt --token=${{ secrets.TEST_VERCEL_TOKEN }})"
           alias_url="clean-architecture-example-$BRANCH_NAME.anisotropys-projects.vercel.app"
           vercel alias --token=${{ secrets.TEST_VERCEL_TOKEN }} set "$url" "$alias_url"
           echo "url=$url" >> $GITHUB_OUTPUT
           echo "alias_url=https://$alias_url" >> $GITHUB_OUTPUT
       - name: Comment PR with deployment URLs
-        # if: github.event_name == 'pull_request'
         uses: marocchino/sticky-pull-request-comment@v2
         with:
           message: |
@@ -49,6 +46,3 @@ jobs:
             |------|------|
             | 🔗 **Preview URL** | [Visit Preview](${{steps.deploy.outputs.alias_url}}) |
             | 📱 **Direct URL** | [Visit Direct](${{steps.deploy.outputs.url}}) |
-            |  github.ref_name | ${{ github.ref_name }} ]
-            |  github.event.pull_request.head.ref | ${{ github.event.pull_request.head.ref }} ]
-            |  github.head_ref | ${{ github.head_ref }} ]
